@@ -6,28 +6,56 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node *next;
+    struct Node *next=NULL;
 };
-struct Node *head;
+ Node *head=NULL;
 
 void print();
-void insert(int x);
-void remove(int x);
+void inserts(int x);
+void removes(int x);
 void between(int p,int v);
+void insertEnd(int v);
 
-void insert(int x)
+void inserts(int x)
 {
-    Node* temp=(Node*)malloc(sizeof(struct Node));
+   printf("Inserted : ");
+    Node* temp=new Node();
     temp->data=x;
     temp->next=head;
     head=temp;
+
+}
+
+void insertEnd(int v)
+{
+
+    Node* newnode=new Node();
+
+    newnode->data=v;
+    newnode->next=NULL;
+
+
+    if(head==NULL)
+    {
+        head=newnode;
+    }
+    else
+    {
+        struct Node* temp2=head;
+        while(temp2->next!=NULL)
+        {
+            temp2=temp2->next;
+        }
+        temp2->next=newnode;
+    }
+
 }
 
 void print()
 {
     printf("\n");
-    struct Node *temp=head;
-    while(temp->next!=NULL)
+    Node *temp=head;
+    while(temp!=NULL)
     {
         printf("%d\n",temp->data);
         temp=temp->next;
@@ -40,28 +68,26 @@ void between(int p,int v)
     int i;
 
     Node* temp3=(Node*)malloc(sizeof(struct Node));
-
+    temp3->data=v;
     struct Node* temp1=head;
-
     for(i=0;i<p-2;i++)
     {
         temp1=temp1->next;
     }
     struct Node* temp2=temp1->next;
-    temp3->data=v;
     temp1->next=temp3;
     temp3->next=temp2;
     print();
 }
 
-void remove (int x)
+void removes (int x)
 {
     int i;
-    struct Node* temp1=head;
+     Node* temp1=head;
 
     if(x==1)
     {
-        temp1=temp1->next;
+        head=temp1->next;
         free(temp1);
         print();
         return;
@@ -71,7 +97,7 @@ void remove (int x)
     {
         temp1=temp1->next;
     }
-    struct Node* temp2=temp1->next;
+    Node* temp2=temp1->next;
     temp1->next=temp2->next;
     free(temp2);
 
@@ -81,6 +107,7 @@ void remove (int x)
 int main()
 {
     head=NULL;
+
     printf("How many Numbers ? :\n");
     int n,i,in;
     scanf("%d",&n);
@@ -89,14 +116,26 @@ int main()
     {
         printf("Enter a number: \n");
         scanf("%d",&in);
-        insert(in);
+        inserts(in);
+        print();
+    }
+
+    printf("Insert at the end of the List:\n");
+    printf("Please Enter list size: ");
+    int s,ss;
+    scanf("%d",&s);
+    for(i=0; i<s; i++)
+    {
+        printf("Enter a number: \n");
+        scanf("%d",&ss);
+        insertEnd(ss);
         print();
     }
 
     printf("Enter a position to remove\n");
     int x;
     scanf("%d",&x);
-    remove(x);
+    removes(x);
 
     printf("Enter a Position and value to insert\n");
     int p,v;
