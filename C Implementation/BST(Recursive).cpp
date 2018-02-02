@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<queue>
 #include<iostream>
-
+using namespace std;
 struct Node
 {
     int data;
@@ -25,7 +25,7 @@ struct Node* insert(Node* root,int x)
     if(root==NULL)
     {
         root=Newnode(x);
-        return root;
+
     }
     else if(x<=root->data)
     {
@@ -35,7 +35,7 @@ struct Node* insert(Node* root,int x)
     {
         root->right=insert(root->right,x);
     }
-
+    return root;
 }
 
 void print(Node* root)
@@ -95,6 +95,82 @@ void  bfs(Node* x)
     }
 }
 
+
+void preorder(Node* root)
+{
+    if(root==NULL)
+       return;
+    printf("%d ",root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void inorder(Node* root)
+{
+    if(root==NULL)
+       return;
+    preorder(root->left);
+    printf("%d ",root->data);
+    preorder(root->right);
+}
+
+void postorder(Node* root)
+{
+    if(root==NULL)
+       return;
+    preorder(root->left);
+    preorder(root->right);
+    printf("%d ",root->data);
+}
+
+void Selection(Node* root,int ch)
+{
+    int val,l;
+    switch(ch)
+    {
+    case 1:
+        printf("enter a value to search: ");
+        scanf("%d",&val);
+        if(search(root,val)==true)
+        {
+            printf("Found\n\n");
+        }
+        else
+        {
+            printf("Not Found\n\n");
+        }
+        break;
+
+    case 2:
+        print(root);
+        printf("\n");
+        break;
+    case 3:
+        bfs(root);
+        printf("\n");
+        break;
+    case 4:
+        scanf("%d",&l);
+        root=insert(root,l);
+        break;
+    case 5:
+        preorder(root);
+        printf("\n");
+        break;
+    case 6:
+        inorder(root);
+        printf("\n");
+        break;
+    case 7:
+        postorder(root);
+        printf("\n");
+        break;
+    default:
+        printf("Please Choose between 1-3\n");
+        break;
+    }
+}
+
 int main()
 {
     struct Node* root=NULL;
@@ -108,29 +184,22 @@ int main()
         scanf("%d",&l);
         root=insert(root,l);
     }
-    printf("enter a value to search: ");
-    scanf("%d",&val);
-    if(search(root,val)==true)
-    {
-        printf("Found\n\n");
-    }
-    else
-    {
-        printf("Not Found\n\n");
-    }
-    print(root);
-    printf("\n");
 
-    bfs(root);
-
+    int ch;
+    while(true)
+    {
+        printf("1: To Search A Value in The Tree\t2: To Print The tree\n3: Perform BFS\t\t4: Insert a value inside the tree\n5: Print Tree in Preorder\t 6: Print Tree in InOrder\t7: Print Tree in PostOrder\n");
+        scanf("%d",&ch);
+        Selection(root,ch);
+    }
     return 0;
 }
 /*
-8                    26
-26             21          30
-21          18          28    33
-30              20                45
-18            19
+8
+26
+21
+30
+18
 20
 28
 33
