@@ -95,6 +95,60 @@ void  bfs(Node* x)
     }
 }
 
+Node* FindMin(Node* root)
+{
+    if(root->left==NULL) return root;
+    FindMin(root->left);
+}
+
+Node* Delete(Node* root,int data)
+{
+
+    if(root==NULL) return root;
+    else if(data<root->data)
+    {
+        root->left=Delete(root->left,data);
+    }
+    else if(data>root->data)
+    {
+        root->right=Delete(root->right,data);
+    }
+
+    else
+    {
+
+        if(root->left==NULL && root->right==NULL)
+        {
+            free(root);
+            root=NULL;
+            return root;
+        }
+        else if(root->left==NULL)
+        {
+            struct Node* temp=root;
+            root=temp->right;
+            free(temp);
+            return root;
+        }
+        else if(root->right==NULL)
+        {
+            struct Node* temp=root;
+            root=temp->left;
+            free(temp);
+            return root;
+        }
+
+        else
+        {
+            struct Node* temp=FindMin(root->right);
+            root->data=temp->data;
+            root->right=Delete(root->right,temp->data);
+            return root;
+        }
+
+    }
+
+}
 
 void preorder(Node* root)
 {
@@ -125,7 +179,7 @@ void postorder(Node* root)
 
 void Selection(Node* root,int ch)
 {
-    int val,l;
+    int val,l,sc;
     switch(ch)
     {
     case 1:
@@ -165,8 +219,14 @@ void Selection(Node* root,int ch)
         postorder(root);
         printf("\n");
         break;
+    case 8:
+        printf("Insert a Value to Delete");
+        scanf("%d",&sc);
+        Delete(root,sc);
+        print(root);
+        break;
     default:
-        printf("Please Choose between 1-3\n");
+        printf("Please Choose between 1-8\n");
         break;
     }
 }
@@ -188,7 +248,7 @@ int main()
     int ch;
     while(true)
     {
-        printf("1: To Search A Value in The Tree\t2: To Print The tree\n3: Perform BFS\t\t4: Insert a value inside the tree\n5: Print Tree in Preorder\t 6: Print Tree in InOrder\t7: Print Tree in PostOrder\n");
+        printf("1: To Search A Value in The Tree\t2: To Print The tree\n3: Perform BFS\t\t4: Insert a value inside the tree\n5: Print Tree in Preorder\t 6: Print Tree in InOrder\n7: Print Tree in PostOrder\t8: Delete A  Node\n");
         scanf("%d",&ch);
         Selection(root,ch);
     }
