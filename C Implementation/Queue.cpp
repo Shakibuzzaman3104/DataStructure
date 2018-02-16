@@ -32,7 +32,7 @@ bool IsFull()
 
 void print()
 {
-    if(IsEmpty()==true)
+    if(IsEmpty())
     {
         printf("No value inside QUEUE\n");
         return;
@@ -49,7 +49,7 @@ void print()
 
 void push(int val)
 {
-    if(IsFull()==true)
+    if(IsFull())
     {
         printf("Queue is Full!!");
         return;

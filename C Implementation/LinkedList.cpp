@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+#include <iostream>
+#include <cstdlib>
 using namespace std;
 
 struct Node
@@ -8,7 +9,8 @@ struct Node
     int data;
     struct Node *next=NULL;
 };
- Node *head=NULL;
+  struct Node *head=NULL;
+  struct Node *array;
 
 void print();
 void inserts(int x);

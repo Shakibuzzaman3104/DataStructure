@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
-#define MAX 13
+#define MAX 10
 
 int top;
 int Front;
