@@ -5,14 +5,14 @@ class Doubly
   static Doubly_Im link;
   static Scanner sc=new Scanner(System.in);
   public static void main(String[] args) {
-    //  System.out.println("Please Enter Size of the Linked List:");
+    System.out.println("Please Enter Size of the Linked List:");
       link=new Doubly_Im();
-    /*  Byte s=sc.nextByte();
+     Byte s=sc.nextByte();
       for(int i=0;i<s;i++)
       {
           int val=sc.nextInt();
           link.insertAtEnd(val);
-      }*/
+      }
       while(true)
       {
           System.out.println("\nSelect your Operation ? : \n1.Insert At Front \n2.Insert At End \n3.Print \n4.print backward");
