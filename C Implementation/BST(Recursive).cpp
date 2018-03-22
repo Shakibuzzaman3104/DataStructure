@@ -25,7 +25,6 @@ struct Node* insert(Node* root,int x)
     if(root==NULL)
     {
         root=Newnode(x);
-
     }
     else if(x<=root->data)
     {
@@ -265,4 +264,3 @@ int main()
 33
 19
 */
-
